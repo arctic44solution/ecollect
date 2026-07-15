@@ -1,0 +1,34 @@
+title ECollect System ERD
+
+colorMode pastel
+styleMode shadow
+typeface rough
+
+users [icon: user, color: purple] {
+  id string pk
+  email string
+  fullName string
+  phone string
+  createdAt datetime
+  updatedAt datetime
+}
+
+wasteSubmissions [icon: file-text, color: green] {
+  submissionId string pk
+  submissionNo string
+  fullName string
+  phone string
+  email string
+  address string
+  city string
+  wasteType enum[] // glass, paper, plastic, metal, e-waste, organic, other
+  estimatedWeight decimal
+  preferredPickupDate date
+  notes string
+  status string // pending, approved, rejected, completed
+  createdAt datetime
+  updatedAt datetime
+}
+
+users.id < submissionStatusHistory.changedBy
+wasteSubmissions.submissionId < submissionStatusHistory.submissionId
