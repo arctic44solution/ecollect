@@ -1,47 +1,181 @@
-import { redirect } from "next/navigation";
+"use client";
 
-import { createClient } from "@/lib/supabase/server";
-import { InfoIcon } from "lucide-react";
-import { FetchDataSteps } from "@/components/tutorial/fetch-data-steps";
-import { Suspense } from "react";
+import * as React from "react";
+import { format } from "date-fns";
+import { Phone, MessageCircle } from "lucide-react";
 
-// async function UserDetails() {
-//   const supabase = await createClient();
-//   const { data, error } = await supabase.auth.getClaims();
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+} from "@/components/ui/field";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 
-//   if (error || !data?.claims) {
-//     redirect("/auth/login");
-//   }
-
-//   return JSON.stringify(data.claims, null, 2);
-// }
+const wasteTypes = [
+  "Plastic Bottles",
+  "Glass Bottles",
+  "Metal Items",
+  "Paper",
+  "Cardboard",
+  "Electronics",
+  "Other"
+];
 
 export default function RequestPage() {
+  const [date, setDate] = React.useState<Date>();
+
   return (
-    <div className="flex-1 w-full flex flex-col gap-12">
-      <div className="w-full">
-        <div className="bg-accent text-sm p-3 px-5 rounded-md text-foreground flex gap-3 items-center">
-          <InfoIcon size="16" strokeWidth={2} />
-          This is a public page that you can only see as an form for submitting a request to the server
+    <div className="mx-auto w-full max-w-xl py-10">
+      {/* Header */}
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-bold">Recycle Your Waste Easily ♻️</h1>
+
+        <p className="mt-3 text-muted-foreground">
+          Submit your recyclable items and we will arrange a collection.
+        </p>
+      </div>
+
+      <form>
+        <FieldGroup>
+          {/* User Information */}
+          <FieldSet>
+            <FieldLegend>Your Information</FieldLegend>
+
+            <FieldDescription>
+              Tell us where to collect your items.
+            </FieldDescription>
+
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="name">සම්පුර්න න​ම</FieldLabel>
+
+                <Input id="name" placeholder="Enter your name" required />
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="phone">දුරකතන අංකය</FieldLabel>
+
+                <Input
+                  id="phone"
+                  placeholder="Enter your phone number"
+                  type="tel"
+                  required
+                />
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="address">පිටත් වියමන ලිපිනය</FieldLabel>
+
+                <Textarea
+                  id="address"
+                  placeholder="Enter your pickup address"
+                  className="resize-none"
+                  required
+                />
+              </Field>
+            </FieldGroup>
+          </FieldSet>
+
+          <FieldSeparator />
+
+          {/* Waste Information */}
+          <FieldSet>
+            <FieldLegend>Waste Information</FieldLegend>
+
+            <FieldDescription>
+              Select the items you want us to collect.
+            </FieldDescription>
+
+            <FieldGroup className="gap-3">
+              {wasteTypes.map((item) => (
+                <Field key={item} orientation="horizontal">
+                  <Checkbox id={item} name="wasteType" />
+
+                  <FieldLabel htmlFor={item} className="font-normal">
+                    {item}
+                  </FieldLabel>
+                </Field>
+              ))}
+            </FieldGroup>
+          </FieldSet>
+
+          <FieldSeparator />
+
+          {/* Collection Date */}
+          <FieldSet>
+            <FieldLegend>Preferred Collection Date</FieldLegend>
+
+            <FieldDescription>
+              Choose a suitable date for pickup.
+            </FieldDescription>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start font-normal"
+                >
+                  {date ? format(date, "PPP") : "Pick a date"}
+                </Button>
+              </PopoverTrigger>
+
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  disabled={(date) => date < new Date()}
+                />
+              </PopoverContent>
+            </Popover>
+          </FieldSet>
+
+          <FieldSeparator />
+
+          {/* Submit */}
+          <Button type="submit" className="w-full">
+            Request Collection
+          </Button>
+        </FieldGroup>
+      </form>
+
+      {/* Contact Section */}
+      <div className="mt-10">
+        <div className="mb-5 text-center">
+          <h2 className="font-semibold">Need Help?</h2>
+
+          <p className="text-sm text-muted-foreground">Contact us directly</p>
+        </div>
+
+        <div className="flex gap-3">
+          <Button variant="outline" className="flex-1" asChild>
+            <a href="tel:+94123456789">
+              <Phone />
+              Call Us
+            </a>
+          </Button>
+
+          <Button variant="outline" className="flex-1" asChild>
+            <a href="https://wa.me/94123456789" target="_blank">
+              <MessageCircle />
+              WhatsApp
+            </a>
+          </Button>
         </div>
       </div>
-      <div className="flex flex-col gap-2 items-start">
-        <h2 className="font-bold text-2xl mb-4">Your user details</h2>
-        <pre className="text-xs font-mono p-3 rounded border max-h-32 overflow-auto">
-          <Suspense>
-            <h1>Request Page</h1>
-
-            <p>
-                This is a public page that you can only see as an form for submitting a request to the server
-            </p>
-
-          </Suspense>
-        </pre>
-      </div>
-      {/* <div>
-        <h2 className="font-bold text-2xl mb-4">Next steps</h2>
-        <FetchDataSteps />
-      </div> */}
     </div>
   );
 }
