@@ -1,11 +1,13 @@
-import { redirect } from "next/navigation";
+"use client";
 
-import { InfoIcon } from "lucide-react";
-import { Suspense } from "react";
+import * as React from "react";
+import { format } from "date-fns";
+import { Phone, MessageCircle } from "lucide-react";
 
-
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Field,
   FieldDescription,
@@ -14,173 +16,166 @@ import {
   FieldLegend,
   FieldSeparator,
   FieldSet,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/field";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 
+const wasteTypes = [
+  "Plastic Bottles",
+  "Glass Bottles",
+  "Metal Items",
+  "Paper",
+  "Cardboard",
+  "Electronics",
+  "Other"
+];
 
 export default function RequestPage() {
+  const [date, setDate] = React.useState<Date>();
+
   return (
-    <div className="flex-1 w-full flex flex-col gap-12">
-      <div className="w-full">
-        <div className="bg-accent text-sm p-3 px-5 rounded-md text-foreground flex gap-3 items-center">
-          <InfoIcon size="16" strokeWidth={2} />
-          This is a public page that you can only see as an form for submitting a request to the server
-        </div>
+    <div className="mx-auto w-full max-w-xl py-10">
+      {/* Header */}
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-bold">Recycle Your Waste Easily ♻️</h1>
+
+        <p className="mt-3 text-muted-foreground">
+          Submit your recyclable items and we will arrange a collection.
+        </p>
       </div>
-      <div className="flex flex-col gap-2 items-start">
-        <h2 className="font-bold text-2xl mb-4">Submit your request</h2>
-        <pre className="text-xs font-mono p-3 rounded border max-h-32 overflow-auto">
-          <Suspense>
-            <h1>Request Page</h1>
-
-            <p>
-                This is a public page that you can only see as an form for submitting a request to the server
-            </p>
-
-          </Suspense>
-        </pre>
-      </div>
-
-
 
       <form>
         <FieldGroup>
+          {/* User Information */}
           <FieldSet>
-            <FieldLegend>Payment Method</FieldLegend>
+            <FieldLegend>Your Information</FieldLegend>
+
             <FieldDescription>
-              All transactions are secure and encrypted
+              Tell us where to collect your items.
             </FieldDescription>
+
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="checkout-7j9-card-name-43j">
-                  Name on Card
-                </FieldLabel>
+                <FieldLabel htmlFor="name">සම්පුර්න න​ම</FieldLabel>
+
+                <Input id="name" placeholder="Enter your name" required />
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="phone">දුරකතන අංකය</FieldLabel>
+
                 <Input
-                  id="checkout-7j9-card-name-43j"
-                  placeholder="Evil Rabbit"
+                  id="phone"
+                  placeholder="Enter your phone number"
+                  type="tel"
                   required
                 />
               </Field>
+
               <Field>
-                <FieldLabel htmlFor="checkout-7j9-card-number-uw1">
-                  Card Number
-                </FieldLabel>
-                <Input
-                  id="checkout-7j9-card-number-uw1"
-                  placeholder="1234 5678 9012 3456"
-                  required
-                />
-                <FieldDescription>
-                  Enter your 16-digit card number
-                </FieldDescription>
-              </Field>
-              <div className="grid grid-cols-3 gap-4">
-                <Field>
-                  <FieldLabel htmlFor="checkout-exp-month-ts6">
-                    Month
-                  </FieldLabel>
-                  <Select defaultValue="">
-                    <SelectTrigger id="checkout-exp-month-ts6">
-                      <SelectValue placeholder="MM" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="01">01</SelectItem>
-                        <SelectItem value="02">02</SelectItem>
-                        <SelectItem value="03">03</SelectItem>
-                        <SelectItem value="04">04</SelectItem>
-                        <SelectItem value="05">05</SelectItem>
-                        <SelectItem value="06">06</SelectItem>
-                        <SelectItem value="07">07</SelectItem>
-                        <SelectItem value="08">08</SelectItem>
-                        <SelectItem value="09">09</SelectItem>
-                        <SelectItem value="10">10</SelectItem>
-                        <SelectItem value="11">11</SelectItem>
-                        <SelectItem value="12">12</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="checkout-7j9-exp-year-f59">
-                    Year
-                  </FieldLabel>
-                  <Select defaultValue="">
-                    <SelectTrigger id="checkout-7j9-exp-year-f59">
-                      <SelectValue placeholder="YYYY" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="2024">2024</SelectItem>
-                        <SelectItem value="2025">2025</SelectItem>
-                        <SelectItem value="2026">2026</SelectItem>
-                        <SelectItem value="2027">2027</SelectItem>
-                        <SelectItem value="2028">2028</SelectItem>
-                        <SelectItem value="2029">2029</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="checkout-7j9-cvv">CVV</FieldLabel>
-                  <Input id="checkout-7j9-cvv" placeholder="123" required />
-                </Field>
-              </div>
-            </FieldGroup>
-          </FieldSet>
-          <FieldSeparator />
-          <FieldSet>
-            <FieldLegend>Billing Address</FieldLegend>
-            <FieldDescription>
-              The billing address associated with your payment method
-            </FieldDescription>
-            <FieldGroup>
-              <Field orientation="horizontal">
-                <Checkbox
-                  id="checkout-7j9-same-as-shipping-wgm"
-                  defaultChecked
-                />
-                <FieldLabel
-                  htmlFor="checkout-7j9-same-as-shipping-wgm"
-                  className="font-normal"
-                >
-                  Same as shipping address
-                </FieldLabel>
-              </Field>
-            </FieldGroup>
-          </FieldSet>
-          <FieldSet>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="checkout-7j9-optional-comments">
-                  Comments
-                </FieldLabel>
+                <FieldLabel htmlFor="address">පිටත් වියමන ලිපිනය</FieldLabel>
+
                 <Textarea
-                  id="checkout-7j9-optional-comments"
-                  placeholder="Add any additional comments"
+                  id="address"
+                  placeholder="Enter your pickup address"
                   className="resize-none"
+                  required
                 />
               </Field>
             </FieldGroup>
           </FieldSet>
-          <Field orientation="horizontal">
-            <Button type="submit">Submit</Button>
-            <Button variant="outline" type="button">
-              Cancel
-            </Button>
-          </Field>
+
+          <FieldSeparator />
+
+          {/* Waste Information */}
+          <FieldSet>
+            <FieldLegend>Waste Information</FieldLegend>
+
+            <FieldDescription>
+              Select the items you want us to collect.
+            </FieldDescription>
+
+            <FieldGroup className="gap-3">
+              {wasteTypes.map((item) => (
+                <Field key={item} orientation="horizontal">
+                  <Checkbox id={item} name="wasteType" />
+
+                  <FieldLabel htmlFor={item} className="font-normal">
+                    {item}
+                  </FieldLabel>
+                </Field>
+              ))}
+            </FieldGroup>
+          </FieldSet>
+
+          <FieldSeparator />
+
+          {/* Collection Date */}
+          <FieldSet>
+            <FieldLegend>Preferred Collection Date</FieldLegend>
+
+            <FieldDescription>
+              Choose a suitable date for pickup.
+            </FieldDescription>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start font-normal"
+                >
+                  {date ? format(date, "PPP") : "Pick a date"}
+                </Button>
+              </PopoverTrigger>
+
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  disabled={(date) => date < new Date()}
+                />
+              </PopoverContent>
+            </Popover>
+          </FieldSet>
+
+          <FieldSeparator />
+
+          {/* Submit */}
+          <Button type="submit" className="w-full">
+            Request Collection
+          </Button>
         </FieldGroup>
       </form>
-      
+
+      {/* Contact Section */}
+      <div className="mt-10">
+        <div className="mb-5 text-center">
+          <h2 className="font-semibold">Need Help?</h2>
+
+          <p className="text-sm text-muted-foreground">Contact us directly</p>
+        </div>
+
+        <div className="flex gap-3">
+          <Button variant="outline" className="flex-1" asChild>
+            <a href="tel:+94123456789">
+              <Phone />
+              Call Us
+            </a>
+          </Button>
+
+          <Button variant="outline" className="flex-1" asChild>
+            <a href="https://wa.me/94123456789" target="_blank">
+              <MessageCircle />
+              WhatsApp
+            </a>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
