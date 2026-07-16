@@ -10,7 +10,7 @@ export default function RequestLayout({
     <main className="min-h-screen flex flex-col items-center">
       <div className="flex-1 w-full flex flex-col gap-10 items-center">
         {/* Render your custom Nav Bar right at the top */}
-        <Navbar />
+        {/* <Navbar /> */}
 
         {/* Content body containing your Form page */}
         <div className="flex-1 flex flex-col max-w-5xl w-full p-5">

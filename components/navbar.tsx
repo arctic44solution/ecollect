@@ -20,7 +20,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link 
-            href="/public/request" 
+            href="/request" 
             className="transition-colors hover:text-foreground text-foreground"
           >
             Request Pickup

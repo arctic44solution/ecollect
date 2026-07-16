@@ -10,7 +10,7 @@ export default function Home() {
     <div className="relative flex flex-col items-center justify-between w-full min-h-[calc(100vh-64px)] overflow-hidden">
       
       {/* Background Image wrapper with forced full dimensions */}
-      <div className="absolute inset-0 -z-10 w-full h-full">
+      {/* <div className="absolute inset-0 -z-10 w-full h-full">
         <Image
           src="/hero-bg.png" 
           alt="Eco Sri Lanka Homepage Background"
@@ -19,7 +19,7 @@ export default function Home() {
           sizes="100vw"
           className="object-cover object-center w-full h-full"
         />
-      </div>
+      </div> */}
 
       {/* Hero Section */}
       {/* ... keeping all of your section code exactly the same ... */}
@@ -40,7 +40,7 @@ export default function Home() {
         
         <div className="flex flex-wrap gap-4 justify-center mt-4">
           <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white font-semibold shadow-sm" asChild>
-            <Link href="/public/request">Request a Pickup</Link>
+            <Link href="/request">Request a Pickup</Link>
           </Button>
         </div>
       </section>
