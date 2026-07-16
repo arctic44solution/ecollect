@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import Navbar from "@/components/navbar";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -9,8 +10,11 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "eCollect - Recycle Smart, Live Green",
+  description: "An effortless way to dispose of your recyclable waste.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 const geistSans = Geist({
@@ -26,14 +30,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
+      <body
+        className={`${geistSans.className} antialiased bg-background text-foreground min-h-screen flex flex-col`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          {/* Your custom navbar renders globally */}
+          <Navbar />
+          <main className="flex-1 w-full flex flex-col">{children}</main>
         </ThemeProvider>
       </body>
     </html>
