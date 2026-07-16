@@ -2,7 +2,13 @@
 
 import * as React from "react";
 import { format } from "date-fns";
-import { Phone, MessageCircle } from "lucide-react";
+import { Phone, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import dynamic from "next/dynamic";
+
+const Calendar = dynamic(() => import("@/components/ui/calendar").then((mod) => mod.Calendar), {
+  ssr: false, // Disables server-side rendering for this component
+});
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,68 +28,183 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
 
-const wasteTypes = [
-  "Plastic Bottles",
-  "Glass Bottles",
-  "Metal Items",
-  "Paper",
-  "Cardboard",
-  "Electronics",
-  "Other"
+
+// Mapping user-friendly names to our database ENUM values
+const wasteTypesMap = [
+  { label: "Plastic Bottles", value: "plastic" },
+  { label: "Glass Bottles", value: "glass" },
+  { label: "Metal Items", value: "metal" },
+  { label: "Paper & Cardboard", value: "paper" },
+  { label: "Electronics", value: "e-waste" },
+  { label: "Organic Waste", value: "organic" },
+  { label: "Other", value: "other" }
 ];
 
 export default function RequestPage() {
+  const supabase = createClient();
+
+  // Form Fields State
+  const [fullName, setFullName] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [selectedWaste, setSelectedWaste] = React.useState<string[]>([]);
   const [date, setDate] = React.useState<Date>();
+  const [notes, setNotes] = React.useState("");
+
+  // Status States
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
+
+  // Handle checking and unchecking waste types
+  const handleWasteCheckboxChange = (value: string, checked: boolean) => {
+    if (checked) {
+      setSelectedWaste((prev) => [...prev, value]);
+    } else {
+      setSelectedWaste((prev) => prev.filter((item) => item !== value));
+    }
+  };
+
+  // Submit Handler
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMsg(null);
+
+    // Basic Validation
+    if (!date) {
+      setErrorMsg("Please select a preferred collection date.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (selectedWaste.length === 0) {
+      setErrorMsg("Please select at least one waste type.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const formattedDate = format(date, "yyyy-MM-dd");
+
+      const { error } = await supabase
+        .from("wasteSubmissions")
+        .insert([
+          {
+            fullName,
+            phone,
+            address,
+            city,
+            wasteType: selectedWaste, // Saves as postgres enum array: e.g. ['plastic', 'glass']
+            preferredPickupDate: formattedDate,
+            notes: notes || null,
+            status: "pending", // Automatically set default
+          },
+        ]);
+
+      if (error) throw error;
+
+      setIsSuccess(true);
+      
+      // Reset form fields
+      setFullName("");
+      setPhone("");
+      setAddress("");
+      setCity("");
+      setSelectedWaste([]);
+      setDate(undefined);
+      setNotes("");
+    } catch (err: any) {
+      console.error("Error submitting form: ", err);
+      setErrorMsg(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isSuccess) {
+    return (
+      <div className="mx-auto w-full max-w-xl py-16 text-center flex flex-col items-center justify-center gap-6">
+        <CheckCircle2 className="h-20 w-20 text-green-600 animate-bounce" />
+        <h1 className="text-3xl font-bold text-foreground">Submission Received! 🎉</h1>
+        <p className="text-muted-foreground text-lg max-w-md">
+          Thank you for recycling! Your request has been successfully saved. Our collection team will review it and contact you soon.
+        </p>
+        <Button 
+          onClick={() => setIsSuccess(false)} 
+          className="mt-4 bg-green-600 hover:bg-green-700 text-white"
+        >
+          Submit Another Request
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full max-w-xl py-10">
       {/* Header */}
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold">Recycle Your Waste Easily ♻️</h1>
-
         <p className="mt-3 text-muted-foreground">
           Submit your recyclable items and we will arrange a collection.
         </p>
       </div>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <FieldGroup>
           {/* User Information */}
           <FieldSet>
             <FieldLegend>Your Information</FieldLegend>
-
             <FieldDescription>
               Tell us where to collect your items.
             </FieldDescription>
 
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="name">සම්පුර්න න​ම</FieldLabel>
-
-                <Input id="name" placeholder="Enter your name" required />
+                <FieldLabel htmlFor="name">සම්පුර්ණ නම / Full Name</FieldLabel>
+                <Input 
+                  id="name" 
+                  placeholder="Enter your name" 
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required 
+                />
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="phone">දුරකතන අංකය</FieldLabel>
-
+                <FieldLabel htmlFor="phone">දුරකතන අංකය / Phone Number</FieldLabel>
                 <Input
                   id="phone"
-                  placeholder="Enter your phone number"
+                  placeholder="Enter your phone number (e.g. 0771234567)"
                   type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   required
                 />
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="address">පිටත් වියමන ලිපිනය</FieldLabel>
-
+                <FieldLabel htmlFor="address">ලිපිනය / Address</FieldLabel>
                 <Textarea
                   id="address"
                   placeholder="Enter your pickup address"
                   className="resize-none"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   required
+                />
+              </Field>
+
+              <Field>
+                <FieldLabel htmlFor="city">නගරය / City</FieldLabel>
+                <Input 
+                  id="city" 
+                  placeholder="Enter your city (e.g. Colombo)" 
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  required 
                 />
               </Field>
             </FieldGroup>
@@ -94,18 +215,21 @@ export default function RequestPage() {
           {/* Waste Information */}
           <FieldSet>
             <FieldLegend>Waste Information</FieldLegend>
-
             <FieldDescription>
               Select the items you want us to collect.
             </FieldDescription>
 
-            <FieldGroup className="gap-3">
-              {wasteTypes.map((item) => (
-                <Field key={item} orientation="horizontal">
-                  <Checkbox id={item} name="wasteType" />
-
-                  <FieldLabel htmlFor={item} className="font-normal">
-                    {item}
+            <FieldGroup className="grid grid-cols-2 gap-3">
+              {wasteTypesMap.map((item) => (
+                <Field key={item.value} orientation="horizontal" className="flex items-center gap-2">
+                  <Checkbox 
+                    id={item.value} 
+                    name="wasteType" 
+                    checked={selectedWaste.includes(item.value)}
+                    onCheckedChange={(checked) => handleWasteCheckboxChange(item.value, !!checked)}
+                  />
+                  <FieldLabel htmlFor={item.value} className="font-normal cursor-pointer select-none">
+                    {item.label}
                   </FieldLabel>
                 </Field>
               ))}
@@ -114,40 +238,67 @@ export default function RequestPage() {
 
           <FieldSeparator />
 
-          {/* Collection Date */}
+          {/* Collection Date & Notes */}
           <FieldSet>
-            <FieldLegend>Preferred Collection Date</FieldLegend>
-
+            <FieldLegend>Preferred Collection Date & Notes</FieldLegend>
             <FieldDescription>
-              Choose a suitable date for pickup.
+              Choose a suitable date and write any special pickup instructions.
             </FieldDescription>
 
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start font-normal"
-                >
-                  {date ? format(date, "PPP") : "Pick a date"}
-                </Button>
-              </PopoverTrigger>
+            <FieldGroup>
+              <Field>
+                <FieldLabel>Pick a Date</FieldLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full justify-start font-normal"
+                    >
+                      {date ? format(date, "PPP") : "Pick a date"}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      disabled={(date) => date < new Date()}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </Field>
 
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  disabled={(date) => date < new Date()}
+              <Field>
+                <FieldLabel htmlFor="notes">අමතර සටහන් / Special Notes (Optional)</FieldLabel>
+                <Textarea
+                  id="notes"
+                  placeholder="E.g. Call before arrival, leave items near gate, etc."
+                  className="resize-none"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
                 />
-              </PopoverContent>
-            </Popover>
+              </Field>
+            </FieldGroup>
           </FieldSet>
+
+          {errorMsg && (
+            <div className="p-3 bg-destructive/10 text-destructive text-sm rounded-lg text-center font-medium">
+              ❌ {errorMsg}
+            </div>
+          )}
 
           <FieldSeparator />
 
           {/* Submit */}
-          <Button type="submit" className="w-full">
-            Request Collection
+          <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting Request...
+              </>
+            ) : (
+              "Request Collection"
+            )}
           </Button>
         </FieldGroup>
       </form>
@@ -156,21 +307,20 @@ export default function RequestPage() {
       <div className="mt-10">
         <div className="mb-5 text-center">
           <h2 className="font-semibold">Need Help?</h2>
-
           <p className="text-sm text-muted-foreground">Contact us directly</p>
         </div>
 
         <div className="flex gap-3">
           <Button variant="outline" className="flex-1" asChild>
             <a href="tel:+94123456789">
-              <Phone />
+              <Phone className="h-4 w-4 mr-2" />
               Call Us
             </a>
           </Button>
 
           <Button variant="outline" className="flex-1" asChild>
-            <a href="https://wa.me/94123456789" target="_blank">
-              <MessageCircle />
+            <a href="https://wa.me/94123456789" target="_blank" rel="noreferrer">
+              <MessageCircle className="h-4 w-4 mr-2" />
               WhatsApp
             </a>
           </Button>
