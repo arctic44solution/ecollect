@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image"; // Added for the background image
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Recycle, Calendar, ShieldCheck, MapPin } from "lucide-react";
+import { CoverageMap } from "@/components/coverage-map";
 
 export default function Home() {
   return (
@@ -108,14 +108,20 @@ export default function Home() {
               </p>
             </div>
           </div>
+
           <Button
             variant="outline"
             size="sm"
             className="whitespace-nowrap w-full sm:w-auto mt-2 sm:mt-0"
             asChild
           >
-            <Link href="/request">Check Locations</Link>
+            <Link href="#coverage-map">Check Locations</Link>
           </Button>
+        </div>
+
+        {/* Coverage Map */}
+        <div id="coverage-map" className="mt-6">
+          <CoverageMap />
         </div>
       </section>
 
