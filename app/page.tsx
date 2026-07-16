@@ -8,7 +8,6 @@ export default function Home() {
   return (
     // We make sure the parent container is explicitly 'relative' and 'w-full'
     <div className="relative flex flex-col items-center justify-between w-full min-h-[calc(100vh-64px)] overflow-hidden">
-      
       {/* Background Image wrapper with forced full dimensions */}
       {/* <div className="absolute inset-0 -z-10 w-full h-full">
         <Image
@@ -29,17 +28,24 @@ export default function Home() {
         <div className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-medium px-4 py-1.5 rounded-full text-sm flex items-center gap-2">
           <Recycle className="h-4 w-4" /> Smart Waste Management Solutions
         </div>
-        
+
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-          Recycle Smart, Live Green with <span className="text-green-600">eCollect</span>
+          Recycle Smart, Live Green with{" "}
+          <span className="text-green-600">eCollect</span>
         </h1>
-        
+
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-          An effortless way to dispose of your recyclable waste. Schedule a pickup from your home or office, and build a cleaner environment together.
+          An effortless way to dispose of your recyclable waste. Schedule a
+          pickup from your home or office, and build a cleaner environment
+          together.
         </p>
-        
+
         <div className="flex flex-wrap gap-4 justify-center mt-4">
-          <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white font-semibold shadow-sm" asChild>
+          <Button
+            size="lg"
+            className="bg-green-600 hover:bg-green-700 text-white font-semibold shadow-sm"
+            asChild
+          >
             <Link href="/request">Request a Pickup</Link>
           </Button>
         </div>
@@ -54,7 +60,8 @@ export default function Home() {
           </div>
           <h3 className="text-xl font-bold">Flexible Scheduling</h3>
           <p className="text-muted-foreground text-sm">
-            Pick a date and time that fits your convenience. Our tracking team coordinates routes efficiently around your preference.
+            Pick a date and time that fits your convenience. Our tracking team
+            coordinates routes efficiently around your preference.
           </p>
         </div>
 
@@ -65,7 +72,9 @@ export default function Home() {
           </div>
           <h3 className="text-xl font-bold">Eco-Friendly Sorting</h3>
           <p className="text-muted-foreground text-sm">
-            We collect plastic, glass, paper, metals, electronics, and organic waste, ensuring everything is sorted and routed to certified recycling centers.
+            We collect plastic, glass, paper, metals, electronics, and organic
+            waste, ensuring everything is sorted and routed to certified
+            recycling centers.
           </p>
         </div>
 
@@ -76,7 +85,8 @@ export default function Home() {
           </div>
           <h3 className="text-xl font-bold">Verified Process</h3>
           <p className="text-muted-foreground text-sm">
-            Track your submission status from pending validation to approved and completed, guaranteeing accountable handling of all recyclables.
+            Track your submission status from pending validation to approved and
+            completed, guaranteeing accountable handling of all recyclables.
           </p>
         </div>
       </section>
@@ -89,12 +99,22 @@ export default function Home() {
               <MapPin className="h-5 w-5" />
             </div>
             <div>
-              <h4 className="font-bold">Now active in Colombo and major suburbs</h4>
-              <p className="text-muted-foreground text-sm mt-0.5">We are actively expanding our pickup networks. Check availability at the form page.</p>
+              <h4 className="font-bold">
+                Now active in Colombo and major suburbs
+              </h4>
+              <p className="text-muted-foreground text-sm mt-0.5">
+                We are actively expanding our pickup networks. Check
+                availability at the form page.
+              </p>
             </div>
           </div>
-          <Button variant="outline" size="sm" className="whitespace-nowrap w-full sm:w-auto mt-2 sm:mt-0" asChild>
-            <Link href="/public/request">Check Locations</Link>
+          <Button
+            variant="outline"
+            size="sm"
+            className="whitespace-nowrap w-full sm:w-auto mt-2 sm:mt-0"
+            asChild
+          >
+            <Link href="/request">Check Locations</Link>
           </Button>
         </div>
       </section>

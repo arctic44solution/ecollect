@@ -6,9 +6,12 @@ import { Phone, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import dynamic from "next/dynamic";
 
-const Calendar = dynamic(() => import("@/components/ui/calendar").then((mod) => mod.Calendar), {
-  ssr: false, // Disables server-side rendering for this component
-});
+const Calendar = dynamic(
+  () => import("@/components/ui/calendar").then((mod) => mod.Calendar),
+  {
+    ssr: false, // Disables server-side rendering for this component
+  },
+);
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,7 +32,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-
 // Mapping user-friendly names to our database ENUM values
 const wasteTypesMap = [
   { label: "Plastic Bottles", value: "plastic" },
@@ -38,7 +40,7 @@ const wasteTypesMap = [
   { label: "Paper & Cardboard", value: "paper" },
   { label: "Electronics", value: "e-waste" },
   { label: "Organic Waste", value: "organic" },
-  { label: "Other", value: "other" }
+  { label: "Other", value: "other" },
 ];
 
 export default function RequestPage() {
@@ -89,25 +91,23 @@ export default function RequestPage() {
     try {
       const formattedDate = format(date, "yyyy-MM-dd");
 
-      const { error } = await supabase
-        .from("wasteSubmissions")
-        .insert([
-          {
-            fullName,
-            phone,
-            address,
-            city,
-            wasteType: selectedWaste, // Saves as postgres enum array: e.g. ['plastic', 'glass']
-            preferredPickupDate: formattedDate,
-            notes: notes || null,
-            status: "pending", // Automatically set default
-          },
-        ]);
+      const { error } = await supabase.from("wasteSubmissions").insert([
+        {
+          fullName,
+          phone,
+          address,
+          city,
+          wasteType: selectedWaste, // Saves as postgres enum array: e.g. ['plastic', 'glass']
+          preferredPickupDate: formattedDate,
+          notes: notes || null,
+          status: "pending", // Automatically set default
+        },
+      ]);
 
       if (error) throw error;
 
       setIsSuccess(true);
-      
+
       // Reset form fields
       setFullName("");
       setPhone("");
@@ -128,12 +128,15 @@ export default function RequestPage() {
     return (
       <div className="mx-auto w-full max-w-xl py-16 text-center flex flex-col items-center justify-center gap-6">
         <CheckCircle2 className="h-20 w-20 text-green-600 animate-bounce" />
-        <h1 className="text-3xl font-bold text-foreground">Submission Received! 🎉</h1>
+        <h1 className="text-3xl font-bold text-foreground">
+          Submission Received! 🎉
+        </h1>
         <p className="text-muted-foreground text-lg max-w-md">
-          Thank you for recycling! Your request has been successfully saved. Our collection team will review it and contact you soon.
+          Thank you for recycling! Your request has been successfully saved. Our
+          collection team will review it and contact you soon.
         </p>
-        <Button 
-          onClick={() => setIsSuccess(false)} 
+        <Button
+          onClick={() => setIsSuccess(false)}
           className="mt-4 bg-green-600 hover:bg-green-700 text-white"
         >
           Submit Another Request
@@ -164,17 +167,19 @@ export default function RequestPage() {
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="name">සම්පුර්ණ නම / Full Name</FieldLabel>
-                <Input 
-                  id="name" 
-                  placeholder="Enter your name" 
+                <Input
+                  id="name"
+                  placeholder="Enter your name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  required 
+                  required
                 />
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="phone">දුරකතන අංකය / Phone Number</FieldLabel>
+                <FieldLabel htmlFor="phone">
+                  දුරකතන අංකය / Phone Number
+                </FieldLabel>
                 <Input
                   id="phone"
                   placeholder="Enter your phone number (e.g. 0771234567)"
@@ -199,12 +204,12 @@ export default function RequestPage() {
 
               <Field>
                 <FieldLabel htmlFor="city">නගරය / City</FieldLabel>
-                <Input 
-                  id="city" 
-                  placeholder="Enter your city (e.g. Colombo)" 
+                <Input
+                  id="city"
+                  placeholder="Enter your city (e.g. Colombo)"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  required 
+                  required
                 />
               </Field>
             </FieldGroup>
@@ -221,14 +226,23 @@ export default function RequestPage() {
 
             <FieldGroup className="grid grid-cols-2 gap-3">
               {wasteTypesMap.map((item) => (
-                <Field key={item.value} orientation="horizontal" className="flex items-center gap-2">
-                  <Checkbox 
-                    id={item.value} 
-                    name="wasteType" 
+                <Field
+                  key={item.value}
+                  orientation="horizontal"
+                  className="flex items-center gap-2"
+                >
+                  <Checkbox
+                    id={item.value}
+                    name="wasteType"
                     checked={selectedWaste.includes(item.value)}
-                    onCheckedChange={(checked) => handleWasteCheckboxChange(item.value, !!checked)}
+                    onCheckedChange={(checked) =>
+                      handleWasteCheckboxChange(item.value, !!checked)
+                    }
                   />
-                  <FieldLabel htmlFor={item.value} className="font-normal cursor-pointer select-none">
+                  <FieldLabel
+                    htmlFor={item.value}
+                    className="font-normal cursor-pointer select-none"
+                  >
                     {item.label}
                   </FieldLabel>
                 </Field>
@@ -270,7 +284,9 @@ export default function RequestPage() {
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="notes">අමතර සටහන් / Special Notes (Optional)</FieldLabel>
+                <FieldLabel htmlFor="notes">
+                  අමතර සටහන් / Special Notes (Optional)
+                </FieldLabel>
                 <Textarea
                   id="notes"
                   placeholder="E.g. Call before arrival, leave items near gate, etc."
@@ -291,10 +307,15 @@ export default function RequestPage() {
           <FieldSeparator />
 
           {/* Submit */}
-          <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting Request...
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting
+                Request...
               </>
             ) : (
               "Request Collection"
@@ -319,7 +340,11 @@ export default function RequestPage() {
           </Button>
 
           <Button variant="outline" className="flex-1" asChild>
-            <a href="https://wa.me/94123456789" target="_blank" rel="noreferrer">
+            <a
+              href="https://wa.me/94123456789"
+              target="_blank"
+              rel="noreferrer"
+            >
               <MessageCircle className="h-4 w-4 mr-2" />
               WhatsApp
             </a>

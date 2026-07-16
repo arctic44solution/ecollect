@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "eCollect - Recycle Smart, Live Green",
   description: "An effortless way to dispose of your recyclable waste.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 const geistSans = Geist({
@@ -27,7 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased bg-background text-foreground min-h-screen flex flex-col`}>
+      <body
+        className={`${geistSans.className} antialiased bg-background text-foreground min-h-screen flex flex-col`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -36,9 +41,7 @@ export default function RootLayout({
         >
           {/* Your custom navbar renders globally */}
           <Navbar />
-          <main className="flex-1 w-full flex flex-col">
-            {children}
-          </main>
+          <main className="flex-1 w-full flex flex-col">{children}</main>
         </ThemeProvider>
       </body>
     </html>
