@@ -31,13 +31,15 @@ export default function Home() {
 
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
           Recycle Smart, Live Green with{" "}
-          <span className="text-green-600">eCollect</span>
+          <span className="text-green-600">EcoSriLanka</span>
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-          An effortless way to dispose of your recyclable waste. Schedule a
-          pickup from your home or office, and build a cleaner environment
-          together.
+          ඔබගේ ප්‍රතිචක්‍රීකරණය කළ හැකි අපද්‍රව්‍ය ඉතා පහසුවෙන් ඉවත් කර ගන්න.
+           ඔබගේ නිවසට හෝ කාර්යාලයට පැමිණ, ඉහළ මිලක් ගෙවා, ඔබ සතු ප්‍රතිචක්‍රීකරණය කළ
+            හැකි ද්‍රව්‍ය අප ආයතනය විසින් ආරක්ෂිත හා වගකීමෙන් යුතුව ලබාගනු ලැබේ. ඔබට පහසු දිනයක් වෙන්කරවාගෙන, අප සමඟ එක්ව පිරිසිදු හා හරිත පරිසරයක් ගොඩනඟමු.
+
+.
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center mt-4">
@@ -46,7 +48,7 @@ export default function Home() {
             className="bg-green-600 hover:bg-green-700 text-white font-semibold shadow-sm"
             asChild
           >
-            <Link href="/request">Request a Pickup</Link>
+            <Link href="/request">ප්‍රතිචක්‍රීකරණ ද්‍රව්‍ය එකතු කර ගැනීමට ඉල්ලීමක් කරන්න</Link>
           </Button>
         </div>
       </section>
@@ -58,10 +60,11 @@ export default function Home() {
           <div className="p-3 bg-green-100 dark:bg-green-950 text-green-600 dark:text-green-400 rounded-lg w-fit">
             <Calendar className="h-6 w-6" />
           </div>
-          <h3 className="text-xl font-bold">Flexible Scheduling</h3>
+          <h3 className="text-xl font-bold">නම්‍යශීලී කාලසටහන්</h3>
           <p className="text-muted-foreground text-sm">
-            Pick a date and time that fits your convenience. Our tracking team
-            coordinates routes efficiently around your preference.
+            ඔබගේ නිවසට හෝ කාර්යාලයට පැමිණ, ප්‍රතිචක්‍රීකරණය කළ හැකි ද්‍රව්‍ය ඉහළ මිලකට මිලදීගෙන ලබාගැනීමට අප සූදානම්.
+             පහසු දිනයක් සහ වේලාවක් තෝරාගන්න. අපගේ එකතු කිරීමේ කණ්ඩායම ඔබගේ පහසුව අනුව කාර්යක්ෂම ගමන් මාර්ග
+              සැලසුම් කර, නියමිත වේලාවට සේවාව ලබාදෙනු ඇත.
           </p>
         </div>
 
@@ -70,11 +73,11 @@ export default function Home() {
           <div className="p-3 bg-green-100 dark:bg-green-950 text-green-600 dark:text-green-400 rounded-lg w-fit">
             <Recycle className="h-6 w-6" />
           </div>
-          <h3 className="text-xl font-bold">Eco-Friendly Sorting</h3>
+          <h3 className="text-xl font-bold">පරිසර හිතකාමී වර්ගීකරණය</h3>
           <p className="text-muted-foreground text-sm">
-            We collect plastic, glass, paper, metals, electronics, and organic
-            waste, ensuring everything is sorted and routed to certified
-            recycling centers.
+            අපි ලෝහ, ප්ලාස්ටික්, වීදුරු, කඩදාසි, ඉලෙක්ට්‍රොනික අපද්‍රව්‍ය, පොල් කටු, කාබනික අපද්‍රව්‍ය සහ සියලුම
+             වර්ගයේ අපද්‍රව්‍ය එකතු කරමු. ඒවා නිසි ලෙස වර්ගීකරණය කර, සහතික ලත් ප්‍රතිචක්‍රීකරණ මධ්‍යස්ථාන
+              වෙත යොමු කර පරිසර හිතකාමී ලෙස කළමනාකරණය කරනු ලැබේ.
           </p>
         </div>
 
@@ -83,10 +86,12 @@ export default function Home() {
           <div className="p-3 bg-green-100 dark:bg-green-950 text-green-600 dark:text-green-400 rounded-lg w-fit">
             <ShieldCheck className="h-6 w-6" />
           </div>
-          <h3 className="text-xl font-bold">Verified Process</h3>
+          <h3 className="text-xl font-bold">තහවුරු කළ ක්‍රියාවලිය</h3>
           <p className="text-muted-foreground text-sm">
-            Track your submission status from pending validation to approved and
-            completed, guaranteeing accountable handling of all recyclables.
+            ඔබගේ ඉල්ලීමේ තත්ත්වය පරීක්ෂා කරමින්, එය තහවුරු කිරීමේ අදියරේ සිට අනුමත කිරීම සහ සම්පූර්ණ කිරීම
+             දක්වා සෑම පියවරක්ම නිරීක්ෂණය කරන්න. සියලුම ප්‍රතිචක්‍රීකරණ ද්‍රව්‍ය වගකීමෙන් හා විශ්වාසනීය ලෙස කළමනාකරණය
+              කරන බව අපි සහතික කරමු.
+
           </p>
         </div>
       </section>
@@ -100,11 +105,11 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold">
-                Now active in Colombo and major suburbs
+                දැනට කොළඹ සහ ප්‍රධාන උප නගරවල ක්‍රියාත්මකයි
               </h4>
               <p className="text-muted-foreground text-sm mt-0.5">
-                We are actively expanding our pickup networks. Check
-                availability at the form page.
+                අපගේ අපද්‍රව්‍ය එකතු කිරීමේ ජාලය තවදුරටත් පුළුල් කරමින් සිටිමු. 
+                ඔබගේ ප්‍රදේශයේ සේවාව ලබාගත හැකිදැයි පරීක්ෂා කිරීමට පෝරම පිටුව වෙත පිවිසෙන්න.
               </p>
             </div>
           </div>

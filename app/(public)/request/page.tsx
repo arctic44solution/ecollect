@@ -132,14 +132,16 @@ export default function RequestPage() {
           Submission Received! 🎉
         </h1>
         <p className="text-muted-foreground text-lg max-w-md">
-          Thank you for recycling! Your request has been successfully saved. Our
-          collection team will review it and contact you soon.
+          ප්‍රතිචක්‍රීකරණයට එක්වීම පිළිබඳව ස්තුතියි!
+
+          ඔබගේ ඉල්ලීම සාර්ථකව සුරක්ෂිත කර ඇත. අපගේ එකතු කිරීමේ කණ්ඩායම එය පරීක්ෂා කර,
+           ඉක්මනින්ම ඔබව සම්බන්ධ කරගනු ඇත.
         </p>
         <Button
           onClick={() => setIsSuccess(false)}
           className="mt-4 bg-green-600 hover:bg-green-700 text-white"
         >
-          Submit Another Request
+          තවත් ඉල්ලීමක් යොමු කරන්න
         </Button>
       </div>
     );
@@ -151,7 +153,7 @@ export default function RequestPage() {
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold">Recycle Your Waste Easily ♻️</h1>
         <p className="mt-3 text-muted-foreground">
-          Submit your recyclable items and we will arrange a collection.
+          ඔබගේ ප්‍රතිචක්‍රීකරණය කළ හැකි ද්‍රව්‍ය ඉදිරිපත් කරන්න, අපි ඒවා එකතු කර ගැනීමට අවශ්‍ය කටයුතු සූදානම් කරමු.
         </p>
       </div>
 
@@ -159,9 +161,9 @@ export default function RequestPage() {
         <FieldGroup>
           {/* User Information */}
           <FieldSet>
-            <FieldLegend>Your Information</FieldLegend>
+            <FieldLegend>ඔබගේ තොරතුරු</FieldLegend>
             <FieldDescription>
-              Tell us where to collect your items.
+              ඔබගේ ද්‍රව්‍ය එකතු කර ගැනීමට ස්ථානය පිළිබඳව අපට දන්වන්න.
             </FieldDescription>
 
             <FieldGroup>
@@ -219,9 +221,9 @@ export default function RequestPage() {
 
           {/* Waste Information */}
           <FieldSet>
-            <FieldLegend>Waste Information</FieldLegend>
+            <FieldLegend>අපද්‍රව්‍ය තොරතුරු</FieldLegend>
             <FieldDescription>
-              Select the items you want us to collect.
+              අප විසින් එකතු කර ගැනීමට අවශ්‍ය ද්‍රව්‍ය තෝරන්න.
             </FieldDescription>
 
             <FieldGroup className="grid grid-cols-2 gap-3">
@@ -254,9 +256,9 @@ export default function RequestPage() {
 
           {/* Collection Date & Notes */}
           <FieldSet>
-            <FieldLegend>Preferred Collection Date & Notes</FieldLegend>
+            <FieldLegend>කැමති එකතු කිරීමේ දිනය සහ සටහන්</FieldLegend>
             <FieldDescription>
-              Choose a suitable date and write any special pickup instructions.
+              ඔබට පහසු දිනයක් තෝරාගෙන, විශේෂ උපදෙස් තිබේ නම් සඳහන් කරන්න.
             </FieldDescription>
 
             <FieldGroup>
@@ -318,7 +320,7 @@ export default function RequestPage() {
                 Request...
               </>
             ) : (
-              "Request Collection"
+              "එකතු කිරීම සඳහා ඉල්ලීම යොමු කරන්න"
             )}
           </Button>
         </FieldGroup>
@@ -327,8 +329,8 @@ export default function RequestPage() {
       {/* Contact Section */}
       <div className="mt-10">
         <div className="mb-5 text-center">
-          <h2 className="font-semibold">Need Help?</h2>
-          <p className="text-sm text-muted-foreground">Contact us directly</p>
+          <h2 className="font-semibold">උදව් අවශ්‍යද?</h2>
+          <p className="text-sm text-muted-foreground">අපව සෘජුවම සම්බන්ධ කරගන්න.</p>
         </div>
 
         <div className="flex gap-3">
