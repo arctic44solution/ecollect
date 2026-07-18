@@ -221,7 +221,7 @@ export default function RequestPage() {
 
           {/* Waste Information */}
           <FieldSet>
-            <FieldLegend>අපද්‍රව්‍ය තොරතුරු</FieldLegend>
+            <FieldLegend>ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය තොරතුරු</FieldLegend>
             <FieldDescription>
               අප විසින් එකතු කර ගැනීමට අවශ්‍ය ද්‍රව්‍ය තෝරන්න.
             </FieldDescription>
@@ -257,7 +257,7 @@ export default function RequestPage() {
           {/* Collection Date & Notes */}
           <FieldSet>
             <FieldLegend>
-              අපද්‍රව්‍ය එකතු කිරීමට කැමති දිනය සහ සටහන්
+              ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය එකතු කිරීමට කැමති දිනය සහ සටහන්
             </FieldLegend>
             <FieldDescription>
               ඔබට පහසු දිනයක් තෝරාගෙන, විශේෂ උපදෙස් තිබේ නම් සඳහන් කරන්න.
@@ -322,7 +322,7 @@ export default function RequestPage() {
                 Request...
               </>
             ) : (
-              "අපද්‍රව්‍ය එකතු කිරීම සඳහා ඉල්ලීම යොමු කරන්න"
+              "ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය එකතු කිරීම සඳහා ඉල්ලීම යොමු කරන්න"
             )}
           </Button>
         </FieldGroup>
@@ -337,7 +337,7 @@ export default function RequestPage() {
 
         <div className="flex gap-3">
           <Button variant="outline" className="flex-1" asChild>
-            <a href="tel:+94123456789">
+            <a href="tel:+94706503676">
               <Phone className="h-4 w-4 mr-2" />
               Call Us
             </a>
@@ -345,7 +345,7 @@ export default function RequestPage() {
 
           <Button variant="outline" className="flex-1" asChild>
             <a
-              href="https://wa.me/94123456789"
+              href="https://wa.me/94706503676"
               target="_blank"
               rel="noreferrer"
             >

@@ -27,10 +27,10 @@ export function Footer({
             </span>
 
             <a
-              href="mailto:hello@ecollect.com"
+              href="https://wa.me/94706503676"
               className="group inline-flex items-center gap-2 text-2xl font-medium text-foreground"
             >
-              <span>hello@ecollect.com</span>
+              <span>Whatsapp</span>
 
               <ArrowRight className="size-6 transition-transform duration-200 group-hover:translate-x-1" />
             </a>
@@ -72,12 +72,12 @@ export function Footer({
               y="95%"
               dominantBaseline="alphabetic"
               textAnchor="start"
-              textLength="70%"
+              textLength="100%"
               lengthAdjust="spacing"
               className="fill-watermark font-sans font-bold"
-              fontSize="130"
+              fontSize="120"
             >
-              eCollect
+              eco Sri Lanka
             </text>
           </svg>
         </div>

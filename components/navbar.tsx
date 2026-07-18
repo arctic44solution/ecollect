@@ -21,7 +21,7 @@ export default function Navbar() {
               href="/request"
               className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
             >
-              Request Pickup
+              පෝරමය වෙත පිවිසෙන්න
             </Link>
           </nav>
 

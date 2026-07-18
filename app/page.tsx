@@ -25,22 +25,22 @@ export default function Home() {
       {/* ... keeping all of your section code exactly the same ... */}
 
       {/* Hero Section */}
-      <section className="text-center max-w-3xl flex flex-col items-center gap-6 px-4 pt-16 md:pt-24 pb-12">
+      <section className="text-center max-w-4xl flex flex-col items-center gap-6 px-4 pt-16 md:pt-24 pb-12">
         <div className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 font-medium px-4 py-1.5 rounded-full text-sm flex items-center gap-2">
           <Recycle className="h-4 w-4" /> Smart Waste Management Solutions
         </div>
 
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
           Recycle Smart, Live Green with{" "}
-          <span className="text-green-600">eCollect</span>
+          <span className="text-green-600">eco Sri Lanka</span>
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-          ඔබගේ ප්‍රතිචක්‍රීකරණය කළ හැකි අපද්‍රව්‍ය ඉතා පහසුවෙන් ඉවත් කර ගන්න.
-          ඔබගේ නිවසට හෝ කාර්යාලයට පැමිණ, ඉහළ මිලක් ගෙවා, ඔබ සතු ප්‍රතිචක්‍රීකරණය
-          කළ හැකි ද්‍රව්‍ය අප ආයතනය විසින් ආරක්ෂිත හා වගකීමෙන් යුතුව ලබාගනු
-          ලැබේ. ඔබට පහසු දිනයක් වෙන්කරවාගෙන, අප සමඟ එක්ව පිරිසිදු හා හරිත
-          පරිසරයක් ගොඩනඟමු.
+          ඔබගේ ප්‍රතිචක්‍රීකරණය කළ හැකි ද්‍රව්‍ය ඉතා පහසුවෙන් ඉවත් කර ගන්න. ඔබගේ
+          නිවසට හෝ කාර්යාලයට පැමිණ, ඉහළ මිලක් ගෙවා, ඔබ සතු ප්‍රතිචක්‍රීකරණය කළ
+          හැකි ද්‍රව්‍ය අප ආයතනය විසින් ආරක්ෂිත හා වගකීමෙන් යුතුව ලබාගනු ලැබේ.
+          ඔබට පහසු දිනයක් වෙන්කරවාගෙන, අප සමඟ එක්ව පිරිසිදු හා හරිත පරිසරයක්
+          ගොඩනඟමු.
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center mt-4">
@@ -80,9 +80,9 @@ export default function Home() {
           <h3 className="text-xl font-bold">පරිසර හිතකාමී වර්ගීකරණය</h3>
           <p className="text-muted-foreground text-sm">
             අපි ලෝහ, ප්ලාස්ටික්, වීදුරු, කඩදාසි, ඉලෙක්ට්‍රොනික අපද්‍රව්‍ය, පොල්
-            කටු, කාබනික අපද්‍රව්‍ය සහ සියලුම වර්ගයේ අපද්‍රව්‍ය එකතු කරමු. ඒවා
-            නිසි ලෙස වර්ගීකරණය කර, සහතික ලත් ප්‍රතිචක්‍රීකරණ මධ්‍යස්ථාන වෙත යොමු
-            කර පරිසර හිතකාමී ලෙස කළමනාකරණය කරනු ලැබේ.
+            කටු සහ සියලුම වර්ගයේ ප්‍රතිචක්‍රීකරණය කළ හැකි ද්‍රව්‍ය එකතු කරමු.
+            ඒවා නිසි ලෙස වර්ගීකරණය කර, සහතික ලත් ප්‍රතිචක්‍රීකරණ මධ්‍යස්ථාන වෙත
+            යොමු කර පරිසර හිතකාමී ලෙස කළමනාකරණය කරනු ලැබේ.
           </p>
         </div>
 
@@ -110,11 +110,12 @@ export default function Home() {
             </div>
             <div>
               <h4 className="font-bold">
-                Now active in Colombo and major suburbs
+                දැනට කොළඹ සහ කොළඹ අවට ප්‍රධාන උප නගරවල ක්‍රියාත්මකයි
               </h4>
               <p className="text-muted-foreground text-sm mt-0.5">
-                We are actively expanding our pickup networks. Check
-                availability at the form page.
+                අපගේ ප්‍රතිචක්‍රීකරණය කළ හැකි ද්‍රව්‍ය එකතු කිරීමේ ජාලය තවදුරටත්
+                පුළුල් කරමින් සිටිමු. ඔබගේ ප්‍රදේශයේ සේවාව ලබාගත හැකිදැයි
+                පරීක්ෂා කිරීමට පහත සිතියම හො අපව අමතන්න.
               </p>
             </div>
           </div>
