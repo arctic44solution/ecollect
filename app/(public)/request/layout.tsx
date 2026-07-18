@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar";
+import { Footer } from "@/components/footer";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export default function RequestLayout({
@@ -8,7 +9,7 @@ export default function RequestLayout({
 }) {
   return (
     <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col gap-10 items-center">
+      <div className="flex-1 w-full flex flex-col  items-center">
         {/* Render your custom Nav Bar right at the top */}
         {/* <Navbar /> */}
 
@@ -17,11 +18,9 @@ export default function RequestLayout({
           {children}
         </div>
 
-        {/* Simple Footer */}
-        <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-10">
-          <p>© 2026 eCollect Sri Lanka. All rights reserved.</p>
-          <ThemeSwitcher />
-        </footer>
+        <div className="flex w-full items-end justify-center bg-muted/30">
+          <Footer />
+        </div>
       </div>
     </main>
   );

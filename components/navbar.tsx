@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Recycle } from "lucide-react";
+import { ThemeSwitcher } from "./theme-switcher";
 
 export default function Navbar() {
   return (
@@ -14,14 +15,18 @@ export default function Navbar() {
           <span className="text-xl font-bold tracking-tight">eCollect</span>
         </Link>
 
-        <nav>
-          <Link
-            href="/request"
-            className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
-          >
-            Request Pickup
-          </Link>
-        </nav>
+        <div className="flex items-center gap-6">
+          <nav>
+            <Link
+              href="/request"
+              className="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+            >
+              Request Pickup
+            </Link>
+          </nav>
+
+          <ThemeSwitcher />
+        </div>
       </div>
     </header>
   );
