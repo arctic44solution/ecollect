@@ -10,6 +10,8 @@ export interface FooterProps {
   navLinks?: FooterNavLink[];
 }
 
+const WATERMARK_TEXT = "eco Sri Lanka";
+
 export function Footer({
   navLinks = [
     { label: "Home", href: "/" },
@@ -20,7 +22,7 @@ export function Footer({
   return (
     <footer className="w-full overflow-hidden">
       <div className="relative px-6 sm:px-10 md:px-16 lg:px-20">
-        <div className="mt-10 flex flex-col gap-8 sm:mt-24 md:mt-28 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mt-10 flex flex-col gap-8 sm:mt-24 md:mt-10 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex flex-col gap-1.5">
             <span className="text-lg font-light tracking-wide text-muted-foreground">
               Reach out at:
@@ -28,6 +30,8 @@ export function Footer({
 
             <a
               href="https://wa.me/94706503676"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 text-2xl font-medium text-foreground"
             >
               <span>Whatsapp</span>
@@ -41,7 +45,7 @@ export function Footer({
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-md font-medium text-foreground"
+                className="text-md font-medium text-foreground transition-opacity hover:opacity-70"
               >
                 {link.label}
               </Link>
@@ -50,34 +54,35 @@ export function Footer({
         </div>
       </div>
 
-      <div className="relative px-6 pt-10 pb-12 sm:px-10 md:px-16 lg:px-20 lg:pt-14 lg:pb-16">
+      <div className="relative px-6 pt-10 pb-2 sm:px-10 md:px-16 lg:px-20 lg:pt-14 lg:pb-2">
         {/* Background Glow */}
-        <div className="pointer-events-none absolute right-0 bottom-0 h-full w-3/4 blur-lg sm:w-2/3">
-          <div className="absolute right-0 bottom-0 h-full w-full bg-gradient-to-tl from-primary/80 via-primary/30 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-3/4">
+          <div className="absolute inset-0 bg-gradient-to-tl from-primary/80 via-primary/30 to-transparent blur-lg" />
 
           <div className="absolute -right-20 -bottom-20 h-80 w-80 rounded-full bg-primary/40 blur-3xl sm:h-96 sm:w-96" />
 
           <div className="absolute right-1/4 bottom-0 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
         </div>
 
-        <div className="relative z-10 flex w-full items-center justify-center overflow-hidden">
+        <div className="relative z-10 overflow-hidden">
           <svg
-            className="h-auto w-full select-none"
-            viewBox={`0 0 ${Math.max("eCollect".length * 90, 400)} 100`}
-            preserveAspectRatio="xMidYMid meet"
-            aria-label="eCollect"
+            className="block h-auto w-full select-none"
+            viewBox="0 0 1000 170"
+            preserveAspectRatio="xMinYMax meet"
+            aria-hidden="true"
           >
             <text
-              x="0%"
-              y="95%"
-              dominantBaseline="alphabetic"
-              textAnchor="start"
-              textLength="100%"
-              lengthAdjust="spacing"
-              className="fill-watermark font-sans font-bold"
-              fontSize="120"
+              x="0"
+              y="140"
+              fontSize="150"
+              fontWeight="700"
+              style={{
+                fontFamily:
+                  'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+              }}
+              className="fill-watermark"
             >
-              eco Sri Lanka
+              {WATERMARK_TEXT}
             </text>
           </svg>
         </div>
