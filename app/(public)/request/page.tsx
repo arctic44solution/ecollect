@@ -5,8 +5,6 @@ import { format } from "date-fns";
 import { Phone, MessageCircle, Loader2, CheckCircle2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import dynamic from "next/dynamic";
-
-// --- Import the Footer ---
 import { CinematicFooter } from "@/components/cinematic-footer";
 
 const Calendar = dynamic(
@@ -94,7 +92,7 @@ export default function RequestPage() {
           phone,
           address,
           city,
-          wasteType: selectedWaste, 
+          wasteType: selectedWaste,
           preferredPickupDate: formattedDate,
           notes: notes || null,
           status: "pending",
@@ -119,71 +117,112 @@ export default function RequestPage() {
     }
   };
 
-  if (isSuccess) {
-    return (
-      <div className="flex flex-col min-h-screen">
-        <div className="flex-1 mx-auto w-full max-w-xl px-4 sm:px-6 py-12 sm:py-16 text-center flex flex-col items-center justify-center gap-5 sm:gap-6">
-          <CheckCircle2 className="h-16 w-16 sm:h-20 sm:w-20 text-green-600 animate-bounce" />
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
-            Submission Received! 🎉
-          </h1>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-md">
-            ප්‍රතිචක්‍රීකරණයට එක්වීම පිළිබඳව ස්තුතියි! ඔබගේ ඉල්ලීම සාර්ථකව
-            සුරක්ෂිත කර ඇත. අපගේ එකතු කිරීමේ කණ්ඩායම එය පරීක්ෂා කර, ඉක්මනින්ම ඔබව
-            සම්බන්ධ කරගනු ඇත.
-          </p>
-          <Button
-            onClick={() => setIsSuccess(false)}
-            className="mt-4 bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto py-6 sm:py-2 rounded-xl sm:rounded-md"
-          >
-            තවත් ඉල්ලීමක් යොමු කරන්න.
-          </Button>
-        </div>
-        <CinematicFooter />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="mx-auto w-full max-w-2xl px-4 sm:px-6 py-8 sm:py-12 flex-1">
-        {/* Header */}
-        <div className="mb-8 sm:mb-10 text-center">
-          <h1 className="text-2xl sm:text-3xl font-bold">Recycle Your Waste Easily ♻️</h1>
-          <p className="mt-2 sm:mt-3 text-sm sm:text-base text-muted-foreground">
-            Submit your recyclable items and we will arrange a collection.
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="w-full">
-          {/* ... (Keep your form logic exactly as it was) ... */}
-          <FieldGroup className="space-y-6 sm:space-y-8">
-            <FieldSet>
-              <FieldLegend className="text-base sm:text-lg">ඔබගේ තොරතුරු</FieldLegend>
-              <FieldGroup className="space-y-4 pt-2">
-                <Field><FieldLabel>Full Name</FieldLabel><Input value={fullName} onChange={(e) => setFullName(e.target.value)} required /></Field>
-                <Field><FieldLabel>Phone</FieldLabel><Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required /></Field>
-                <Field><FieldLabel>Address</FieldLabel><Textarea value={address} onChange={(e) => setAddress(e.target.value)} required /></Field>
-                <Field><FieldLabel>City</FieldLabel><Input value={city} onChange={(e) => setCity(e.target.value)} required /></Field>
-              </FieldGroup>
-            </FieldSet>
-            
-            {/* Waste Selection and Date Pickers remain here */}
-            {/* ... */}
-            
-            <Button type="submit" className="w-full h-auto bg-green-600 py-4" disabled={isSubmitting}>
-              {isSubmitting ? "Submitting..." : "Submit Request"}
+    <div className="w-full flex flex-col">
+      <div className="flex-1 mx-auto w-full max-w-2xl px-4 sm:px-6 py-8 sm:py-12">
+        {isSuccess ? (
+          <div className="text-center flex flex-col items-center justify-center gap-5 sm:gap-6 py-20">
+            <CheckCircle2 className="h-16 w-16 sm:h-20 sm:w-20 text-green-600 animate-bounce" />
+            <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
+              Submission Received! 🎉
+            </h1>
+            <p className="text-muted-foreground text-base sm:text-lg max-w-md">
+              ප්‍රතිචක්‍රීකරණයට එක්වීම පිළිබඳව ස්තුතියි! ඔබගේ ඉල්ලීම සාර්ථකව
+              සුරක්ෂිත කර ඇත. අපගේ එකතු කිරීමේ කණ්ඩායම එය පරීක්ෂා කර, ඉක්මනින්ම ඔබව
+              සම්බන්ධ කරගනු ඇත.
+            </p>
+            <Button
+              onClick={() => setIsSuccess(false)}
+              className="mt-4 bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto py-6 sm:py-2 rounded-xl sm:rounded-md"
+            >
+              තවත් ඉල්ලීමක් යොමු කරන්න.
             </Button>
-          </FieldGroup>
-        </form>
+          </div>
+        ) : (
+          <>
+            <div className="mb-8 sm:mb-10 text-center">
+              <h1 className="text-2xl sm:text-3xl font-bold">Recycle Your Waste Easily ♻️</h1>
+              <p className="mt-2 sm:mt-3 text-sm sm:text-base text-muted-foreground">
+                Submit your recyclable items and we will arrange a collection.
+              </p>
+            </div>
 
-        {/* Contact Section */}
-        <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200 dark:border-zinc-800">
-           {/* ... Contact buttons ... */}
-        </div>
+            <form onSubmit={handleSubmit} className="w-full">
+              <FieldGroup className="space-y-6 sm:space-y-8">
+                <FieldSet>
+                  <FieldLegend className="text-base sm:text-lg">ඔබගේ තොරතුරු</FieldLegend>
+                  <FieldGroup className="space-y-4 pt-2">
+                    <Field>
+                      <FieldLabel htmlFor="name" className="text-sm">සම්පුර්ණ නම / Full Name</FieldLabel>
+                      <Input id="name" placeholder="Enter your name" value={fullName} onChange={(e) => setFullName(e.target.value)} required className="w-full h-11 sm:h-10 rounded-xl sm:rounded-md" />
+                    </Field>
+                    <Field>
+                      <FieldLabel htmlFor="phone" className="text-sm">දුරකතන අංකය / Phone Number</FieldLabel>
+                      <Input id="phone" placeholder="0771234567" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required className="w-full h-11 sm:h-10 rounded-xl sm:rounded-md" />
+                    </Field>
+                    <Field>
+                      <FieldLabel htmlFor="address" className="text-sm">ලිපිනය / Address</FieldLabel>
+                      <Textarea id="address" placeholder="Enter your pickup address" className="resize-none w-full min-h-[100px] rounded-xl sm:rounded-md" value={address} onChange={(e) => setAddress(e.target.value)} required />
+                    </Field>
+                    <Field>
+                      <FieldLabel htmlFor="city" className="text-sm">නගරය / City</FieldLabel>
+                      <Input id="city" placeholder="Colombo" value={city} onChange={(e) => setCity(e.target.value)} required className="w-full h-11 sm:h-10 rounded-xl sm:rounded-md" />
+                    </Field>
+                  </FieldGroup>
+                </FieldSet>
+
+                <FieldSeparator className="my-6" />
+
+                <FieldSet>
+                  <FieldLegend className="text-base sm:text-lg">ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය තොරතුරු</FieldLegend>
+                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-3">
+                    {wasteTypesMap.map((item) => (
+                      <Field key={item.value} orientation="horizontal" className="flex items-center gap-3 p-3 sm:p-2 rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/50 sm:border-transparent sm:bg-transparent">
+                        <Checkbox id={item.value} checked={selectedWaste.includes(item.value)} onCheckedChange={(checked) => handleWasteCheckboxChange(item.value, !!checked)} className="h-5 w-5 sm:h-4 sm:w-4 shrink-0" />
+                        <FieldLabel htmlFor={item.value} className="font-medium sm:font-normal cursor-pointer select-none text-sm sm:text-base flex-1">{item.label}</FieldLabel>
+                      </Field>
+                    ))}
+                  </FieldGroup>
+                </FieldSet>
+
+                <FieldSeparator className="my-6" />
+
+                <FieldSet>
+                  <FieldLegend className="text-base sm:text-lg">දිනය සහ සටහන්</FieldLegend>
+                  <FieldGroup className="space-y-4 pt-2">
+                    <Field>
+                      <FieldLabel className="text-sm">Pick a Date</FieldLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button type="button" variant="outline" className="w-full justify-start font-normal text-left h-11 sm:h-10 rounded-xl sm:rounded-md">
+                            {date ? format(date, "PPP") : "Pick a date"}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar mode="single" selected={date} onSelect={setDate} disabled={(date) => date < new Date()} />
+                        </PopoverContent>
+                      </Popover>
+                    </Field>
+                    <Field>
+                      <FieldLabel htmlFor="notes" className="text-sm">අමතර සටහන් / Special Notes (Optional)</FieldLabel>
+                      <Textarea id="notes" className="resize-none w-full min-h-[100px] rounded-xl sm:rounded-md" value={notes} onChange={(e) => setNotes(e.target.value)} />
+                    </Field>
+                  </FieldGroup>
+                </FieldSet>
+
+                {errorMsg && (
+                  <div className="p-4 bg-destructive/10 border border-destructive/20 text-destructive text-sm rounded-xl text-center font-medium my-4">❌ {errorMsg}</div>
+                )}
+
+                <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 rounded-xl" disabled={isSubmitting}>
+                  {isSubmitting ? <span className="flex items-center"><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Submitting...</span> : "ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය එකතු කිරීම සඳහා ඉල්ලීම යොමු කරන්න"}
+                </Button>
+              </FieldGroup>
+            </form>
+          </>
+        )}
       </div>
 
-      {/* --- Footer added here --- */}
       <CinematicFooter />
     </div>
   );
