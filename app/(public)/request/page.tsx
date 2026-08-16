@@ -126,19 +126,19 @@ export default function RequestPage() {
 
   if (isSuccess) {
     return (
-      <div className="mx-auto w-full max-w-xl py-16 text-center flex flex-col items-center justify-center gap-6">
-        <CheckCircle2 className="h-20 w-20 text-green-600 animate-bounce" />
-        <h1 className="text-3xl font-bold text-foreground">
+      <div className="mx-auto w-full max-w-xl px-4 sm:px-6 py-12 sm:py-16 text-center flex flex-col items-center justify-center gap-5 sm:gap-6">
+        <CheckCircle2 className="h-16 w-16 sm:h-20 sm:w-20 text-green-600 animate-bounce" />
+        <h1 className="text-2xl sm:text-3xl font-bold text-foreground">
           Submission Received! 🎉
         </h1>
-        <p className="text-muted-foreground text-lg max-w-md">
+        <p className="text-muted-foreground text-base sm:text-lg max-w-md">
           ප්‍රතිචක්‍රීකරණයට එක්වීම පිළිබඳව ස්තුතියි! ඔබගේ ඉල්ලීම සාර්ථකව
           සුරක්ෂිත කර ඇත. අපගේ එකතු කිරීමේ කණ්ඩායම එය පරීක්ෂා කර, ඉක්මනින්ම ඔබව
           සම්බන්ධ කරගනු ඇත.
         </p>
         <Button
           onClick={() => setIsSuccess(false)}
-          className="mt-4 bg-green-600 hover:bg-green-700 text-white"
+          className="mt-4 bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto py-6 sm:py-2 rounded-xl sm:rounded-md"
         >
           තවත් ඉල්ලීමක් යොමු කරන්න.
         </Button>
@@ -147,39 +147,40 @@ export default function RequestPage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-xl py-10">
+    <div className="mx-auto w-full max-w-2xl px-4 sm:px-6 py-8 sm:py-12">
       {/* Header */}
-      <div className="mb-8 text-center">
-        <h1 className="text-3xl font-bold">Recycle Your Waste Easily ♻️</h1>
-        <p className="mt-3 text-muted-foreground">
+      <div className="mb-8 sm:mb-10 text-center">
+        <h1 className="text-2xl sm:text-3xl font-bold">Recycle Your Waste Easily ♻️</h1>
+        <p className="mt-2 sm:mt-3 text-sm sm:text-base text-muted-foreground">
           Submit your recyclable items and we will arrange a collection.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <FieldGroup>
+      <form onSubmit={handleSubmit} className="w-full">
+        <FieldGroup className="space-y-6 sm:space-y-8">
           {/* User Information */}
           <FieldSet>
-            <FieldLegend>ඔබගේ තොරතුරු</FieldLegend>
-            <FieldDescription>
+            <FieldLegend className="text-base sm:text-lg">ඔබගේ තොරතුරු</FieldLegend>
+            <FieldDescription className="text-xs sm:text-sm">
               ඔබගේ ප්‍රතිචක්‍රීකරණ ද්‍රව්‍ය එකතු කර ගැනීමට ඇති ස්ථානය පිළිබඳව
               අපට දන්වන්න.
             </FieldDescription>
 
-            <FieldGroup>
+            <FieldGroup className="space-y-4 pt-2">
               <Field>
-                <FieldLabel htmlFor="name">සම්පුර්ණ නම / Full Name</FieldLabel>
+                <FieldLabel htmlFor="name" className="text-sm">සම්පුර්ණ නම / Full Name</FieldLabel>
                 <Input
                   id="name"
                   placeholder="Enter your name"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
+                  className="w-full h-11 sm:h-10 rounded-xl sm:rounded-md"
                 />
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="phone">
+                <FieldLabel htmlFor="phone" className="text-sm">
                   දුරකතන අංකය / Phone Number
                 </FieldLabel>
                 <Input
@@ -189,15 +190,16 @@ export default function RequestPage() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
+                  className="w-full h-11 sm:h-10 rounded-xl sm:rounded-md"
                 />
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="address">ලිපිනය / Address</FieldLabel>
+                <FieldLabel htmlFor="address" className="text-sm">ලිපිනය / Address</FieldLabel>
                 <Textarea
                   id="address"
                   placeholder="Enter your pickup address"
-                  className="resize-none"
+                  className="resize-none w-full min-h-[100px] rounded-xl sm:rounded-md"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   required
@@ -205,33 +207,34 @@ export default function RequestPage() {
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="city">නගරය / City</FieldLabel>
+                <FieldLabel htmlFor="city" className="text-sm">නගරය / City</FieldLabel>
                 <Input
                   id="city"
                   placeholder="Enter your city (e.g. Colombo)"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   required
+                  className="w-full h-11 sm:h-10 rounded-xl sm:rounded-md"
                 />
               </Field>
             </FieldGroup>
           </FieldSet>
 
-          <FieldSeparator />
+          <FieldSeparator className="my-6" />
 
           {/* Waste Information */}
           <FieldSet>
-            <FieldLegend>ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය තොරතුරු</FieldLegend>
-            <FieldDescription>
+            <FieldLegend className="text-base sm:text-lg">ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය තොරතුරු</FieldLegend>
+            <FieldDescription className="text-xs sm:text-sm">
               අප විසින් එකතු කර ගැනීමට අවශ්‍ය ද්‍රව්‍ය තෝරන්න.
             </FieldDescription>
 
-            <FieldGroup className="grid grid-cols-2 gap-3">
+            <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-3">
               {wasteTypesMap.map((item) => (
                 <Field
                   key={item.value}
                   orientation="horizontal"
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-3 p-3 sm:p-2 rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/50 sm:border-transparent sm:bg-transparent"
                 >
                   <Checkbox
                     id={item.value}
@@ -240,10 +243,11 @@ export default function RequestPage() {
                     onCheckedChange={(checked) =>
                       handleWasteCheckboxChange(item.value, !!checked)
                     }
+                    className="h-5 w-5 sm:h-4 sm:w-4 shrink-0"
                   />
                   <FieldLabel
                     htmlFor={item.value}
-                    className="font-normal cursor-pointer select-none"
+                    className="font-medium sm:font-normal cursor-pointer select-none text-sm sm:text-base flex-1"
                   >
                     {item.label}
                   </FieldLabel>
@@ -252,26 +256,26 @@ export default function RequestPage() {
             </FieldGroup>
           </FieldSet>
 
-          <FieldSeparator />
+          <FieldSeparator className="my-6" />
 
           {/* Collection Date & Notes */}
           <FieldSet>
-            <FieldLegend>
+            <FieldLegend className="text-base sm:text-lg">
               ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය එකතු කිරීමට කැමති දිනය සහ සටහන්
             </FieldLegend>
-            <FieldDescription>
+            <FieldDescription className="text-xs sm:text-sm">
               ඔබට පහසු දිනයක් තෝරාගෙන, විශේෂ උපදෙස් තිබේ නම් සඳහන් කරන්න.
             </FieldDescription>
 
-            <FieldGroup>
+            <FieldGroup className="space-y-4 pt-2">
               <Field>
-                <FieldLabel>Pick a Date</FieldLabel>
+                <FieldLabel className="text-sm">Pick a Date</FieldLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       type="button"
                       variant="outline"
-                      className="w-full justify-start font-normal"
+                      className="w-full justify-start font-normal text-left h-11 sm:h-10 rounded-xl sm:rounded-md"
                     >
                       {date ? format(date, "PPP") : "Pick a date"}
                     </Button>
@@ -288,13 +292,13 @@ export default function RequestPage() {
               </Field>
 
               <Field>
-                <FieldLabel htmlFor="notes">
+                <FieldLabel htmlFor="notes" className="text-sm">
                   අමතර සටහන් / Special Notes (Optional)
                 </FieldLabel>
                 <Textarea
                   id="notes"
                   placeholder="E.g. Call before arrival, leave items near gate, etc."
-                  className="resize-none"
+                  className="resize-none w-full min-h-[100px] rounded-xl sm:rounded-md"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                 />
@@ -303,47 +307,47 @@ export default function RequestPage() {
           </FieldSet>
 
           {errorMsg && (
-            <div className="p-3 bg-destructive/10 text-destructive text-sm rounded-lg text-center font-medium">
+            <div className="p-4 bg-destructive/10 border border-destructive/20 text-destructive text-sm rounded-xl text-center font-medium my-4">
               ❌ {errorMsg}
             </div>
           )}
 
-          <FieldSeparator />
+          <FieldSeparator className="my-6" />
 
           {/* Submit */}
-          <Button
-            type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting
-                Request...
-              </>
-            ) : (
-              "ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය එකතු කිරීම සඳහා ඉල්ලීම යොමු කරන්න"
-            )}
-          </Button>
+            <Button
+              type="submit"
+              className="w-full h-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-4 sm:py-3 px-4 text-sm sm:text-base rounded-xl sm:rounded-md whitespace-normal text-center leading-relaxed transition-all shadow-sm"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <span className="flex items-center justify-center">
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin shrink-0" /> 
+                  Submitting Request...
+                </span>
+              ) : (
+                "ප්‍රතිචක්‍රීකරණය කල හැකි ද්‍රව්‍ය එකතු කිරීම සඳහා ඉල්ලීම යොමු කරන්න"
+              )}
+            </Button>
         </FieldGroup>
       </form>
 
       {/* Contact Section */}
-      <div className="mt-10">
-        <div className="mb-5 text-center">
-          <h2 className="font-semibold">උදව් අවශ්‍යද?</h2>
-          <p className="text-sm text-muted-foreground">අපව සෘජුවම සම්බන්ධ කරගන්න.</p>
+      <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200 dark:border-zinc-800">
+        <div className="mb-6 text-center">
+          <h2 className="text-lg sm:text-xl font-bold">උදව් අවශ්‍යද?</h2>
+          <p className="text-sm text-muted-foreground mt-1">අපව සෘජුවම සම්බන්ධ කරගන්න.</p>
         </div>
 
-        <div className="flex gap-3">
-          <Button variant="outline" className="flex-1" asChild>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <Button variant="outline" className="flex-1 h-12 sm:h-10 rounded-xl sm:rounded-md" asChild>
             <a href="tel:+94706503676">
               <Phone className="h-4 w-4 mr-2" />
               Call Us
             </a>
           </Button>
 
-          <Button variant="outline" className="flex-1" asChild>
+          <Button variant="outline" className="flex-1 h-12 sm:h-10 rounded-xl sm:rounded-md" asChild>
             <a
               href="https://wa.me/94706503676"
               target="_blank"
