@@ -195,7 +195,7 @@ export function LocationMap({
               {/* Text Hint Badge (Top Left) */}
               <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-[100] bg-white/95 dark:bg-black/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 pointer-events-none">
                  <p className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200">
-                     Drag to move
+                    👆 Drag to move
                  </p>
               </div>
 
