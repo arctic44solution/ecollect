@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
-import { Footer } from "@/components/footer";
+// 1. Change the import
+import { CinematicFooter } from "@/components/cinematic-footer";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export default function RequestLayout({
@@ -9,8 +10,8 @@ export default function RequestLayout({
 }) {
   return (
     <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col  items-center">
-        {/* Render your custom Nav Bar right at the top */}
+      <div className="flex-1 w-full flex flex-col items-center">
+        {/* Uncomment your Navbar if you want it visible on this page */}
         {/* <Navbar /> */}
 
         {/* Content body containing your Form page */}
@@ -18,8 +19,9 @@ export default function RequestLayout({
           {children}
         </div>
 
-        <div className="flex w-full items-end justify-center bg-muted/30">
-          <Footer />
+        {/* 2. Use the CinematicFooter here */}
+        <div className="flex w-full items-end justify-center">
+          <CinematicFooter />
         </div>
       </div>
     </main>

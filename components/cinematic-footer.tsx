@@ -333,9 +333,7 @@ export function CinematicFooter() {
 
               {/* Secondary Text Links */}
               <div className="flex flex-wrap justify-center gap-3 md:gap-6 w-full mt-2">
-                <MagneticButton as={Link} href="/auth/login" className="footer-glass-pill px-6 py-3 rounded-full text-neutral-500 font-medium text-xs md:text-sm hover:text-foreground">
-                  Admin Dashboard
-                </MagneticButton>
+                
                 <MagneticButton as="a" href="https://wa.me/94706503676" target="_blank" className="footer-glass-pill px-6 py-3 rounded-full text-neutral-500 font-medium text-xs md:text-sm hover:text-foreground">
                   WhatsApp Support
                 </MagneticButton>
@@ -355,7 +353,7 @@ export function CinematicFooter() {
               <span className="text-neutral-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">Built with</span>
               <span className="animate-footer-heartbeat text-sm md:text-base text-emerald-500">❤</span>
               <span className="text-neutral-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">in</span>
-              <span className="text-foreground font-black text-xs md:text-sm tracking-normal ml-1">Sri Lanka</span>
+              <span className="text-foreground font-black text-xs md:text-sm tracking-normal ml-1">Arctic44</span>
             </div>
 
             <MagneticButton
