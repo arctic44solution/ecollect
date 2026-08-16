@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { 
   MapPin, ArrowRight, Languages, PhoneCall, Truck, Banknote, Pointer 
@@ -104,7 +104,7 @@ const content = {
 };
 
 // Reusable animation variant for smooth fade-up effect
-const fadeUpVariant = {
+const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
