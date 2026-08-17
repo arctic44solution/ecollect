@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { 
-  MapPin, ArrowRight, Languages, PhoneCall, Truck, Banknote, Pointer, Star, Leaf, Recycle
+  MapPin, ArrowRight, PhoneCall, Truck, Banknote, Pointer, Star, Leaf, Recycle
 } from "lucide-react";
+import { useLanguage } from "@/lib/language-context";
 
 // Components
 import { LocationMap } from "@/components/ui/expand-map";
 import { CinematicFooter } from "@/components/cinematic-footer"; 
 import { CoverflowCarousel } from "@/components/ui/coverflow-carousel";
 
-// --- Translation Dictionary ---
 const content = {
   SI: {
     title1: "ඔබේ අපද්‍රව්‍ය,",
@@ -73,14 +73,11 @@ const fadeUpItem: Variants = {
 };
 
 export default function Home() {
-  const [lang, setLang] = useState<"SI" | "EN">("SI");
+  const { lang } = useLanguage(); // Reads the language from the global state
   const t = content[lang];
 
   const { scrollY } = useScroll();
-  
   const width = useTransform(scrollY, [0, 250], ["94%", "100%"]);
-  
-  // FIX: Top left and right start at 40px, Bottom left and right start at 0px!
   const borderRadius = useTransform(scrollY, [0, 250], ["40px 40px 0px 0px", "0px 0px 0px 0px"]);
   
   const orb1Y = useTransform(scrollY, [0, 500], [0, 150]);
@@ -91,7 +88,6 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen w-full font-sans antialiased selection:bg-[#00a65a]/30 overflow-x-hidden bg-[#f4f4f5] dark:bg-[#000000]">
-      
       <div className="absolute inset-0 z-0 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-50 pointer-events-none"></div>
 
       <div className="w-full flex justify-center pt-6 sm:pt-10 z-10 relative">
@@ -101,36 +97,23 @@ export default function Home() {
         >
           <div className="absolute inset-0 z-0 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#27272a_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40 pointer-events-none"></div>
 
-          <motion.div 
-            style={{ y: orb1Y, rotate: orb1Rotate }}
-            className="absolute top-[10%] left-[-5%] sm:left-[5%] md:left-[15%] w-48 h-48 sm:w-64 sm:h-64 z-0 pointer-events-none"
-          >
+          <motion.div style={{ y: orb1Y, rotate: orb1Rotate }} className="absolute top-[10%] left-[-5%] sm:left-[5%] md:left-[15%] w-48 h-48 sm:w-64 sm:h-64 z-0 pointer-events-none">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#6ee7b7] to-[#00a65a] blur-2xl opacity-20" />
             <div className="absolute inset-4 rounded-full bg-gradient-to-br from-[#a7f3d0] to-[#00a65a] shadow-[inset_-10px_-10px_30px_rgba(0,0,0,0.1),_20px_20px_40px_rgba(0,166,90,0.2)] flex items-center justify-center backdrop-blur-md opacity-80">
               <Leaf className="w-20 h-20 text-white/90" strokeWidth={1.5} />
             </div>
           </motion.div>
 
-          <motion.div 
-            style={{ y: orb2Y, rotate: orb2Rotate }}
-            className="absolute bottom-[5%] right-[-5%] sm:right-[5%] md:right-[15%] w-40 h-40 sm:w-56 sm:h-56 z-0 pointer-events-none"
-          >
+          <motion.div style={{ y: orb2Y, rotate: orb2Rotate }} className="absolute bottom-[5%] right-[-5%] sm:right-[5%] md:right-[15%] w-40 h-40 sm:w-56 sm:h-56 z-0 pointer-events-none">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#047857] to-[#34d399] blur-2xl opacity-10" />
             <div className="absolute inset-4 rounded-full bg-gradient-to-br from-[#00a65a] to-[#6ee7b7] shadow-[inset_-10px_-10px_30px_rgba(0,0,0,0.15),_20px_20px_40px_rgba(0,166,90,0.15)] flex items-center justify-center backdrop-blur-md opacity-70">
               <Recycle className="w-16 h-16 text-white/90" strokeWidth={1.5} />
             </div>
           </motion.div>
 
-          <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl px-4 w-full pt-16 pb-20 sm:pt-24 sm:pb-28">
+          {/* Hero Content Area */}
+          <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl px-4 w-full pt-28 pb-20 sm:pt-36 sm:pb-28">
             
-            <button 
-              onClick={() => setLang(lang === "SI" ? "EN" : "SI")}
-              className="mb-8 sm:mb-10 inline-flex items-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-md px-5 py-2 text-sm font-bold text-neutral-700 dark:text-neutral-200 shadow-sm transition-all hover:bg-neutral-50 dark:hover:bg-neutral-800 active:scale-95 cursor-pointer"
-            >
-              <Languages className="h-4 w-4 text-[#00a65a]" />
-              {lang === "SI" ? "Read in English" : "සිංහලෙන් කියවන්න"}
-            </button>
-
             <h1 className="text-5xl sm:text-6xl md:text-[5.5rem] font-bold tracking-tight leading-[1.1] mb-6 text-neutral-900 dark:text-white">
               {t.title1} <br />
               <span className="text-[#00a65a] relative inline-block mt-2">
@@ -144,22 +127,14 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-4 sm:px-0 mb-12">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto h-14 px-8 bg-[#00a65a] hover:bg-[#008f4d] text-white rounded-full text-base font-bold shadow-lg shadow-[#00a65a]/20 transition-all hover:-translate-y-0.5 active:scale-95"
-                asChild
-              >
+              <Button size="lg" className="w-full sm:w-auto h-14 px-8 bg-[#00a65a] hover:bg-[#008f4d] text-white rounded-full text-base font-bold shadow-lg shadow-[#00a65a]/20 transition-all hover:-translate-y-0.5 active:scale-95" asChild>
                 <Link href="/request" className="flex items-center justify-center gap-2">
                   {t.primaryBtn}
                   <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
               
-              <Button
-                size="lg"
-                className="w-full sm:w-auto h-14 px-8 rounded-full text-base font-bold bg-[#f3f4f6] text-neutral-900 hover:bg-[#e5e7eb] dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 transition-all hover:-translate-y-0.5 active:scale-95 border-0 shadow-sm"
-                asChild
-              >
+              <Button size="lg" className="w-full sm:w-auto h-14 px-8 rounded-full text-base font-bold bg-[#f3f4f6] text-neutral-900 hover:bg-[#e5e7eb] dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 transition-all hover:-translate-y-0.5 active:scale-95 border-0 shadow-sm" asChild>
                 <Link href="#coverage-map">
                   {t.secondaryBtn}
                 </Link>
@@ -189,18 +164,13 @@ export default function Home() {
                 </p>
               </div>
             </div>
-
           </div>
         </motion.div>
       </div>
 
       <main className="relative z-20 bg-white dark:bg-[#0a0a0a] w-full pt-10 sm:pt-16">
-        
         <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-12">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpItem}
-            className="flex flex-col items-center"
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpItem} className="flex flex-col items-center">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-12 text-neutral-900 dark:text-white text-center">
               {t.stepsTitle}
             </h2>
@@ -226,9 +196,7 @@ export default function Home() {
         </section>
 
         <section className="mx-auto w-full max-w-7xl px-0 py-16 sm:py-24 overflow-hidden bg-neutral-50 dark:bg-[#111]/50 border-y border-neutral-100 dark:border-neutral-900 mt-10">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpItem}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpItem}>
             <div className="text-center px-4 mb-8">
               <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 text-neutral-900 dark:text-white">
                 {t.carouselTitle}
@@ -248,10 +216,7 @@ export default function Home() {
         </section>
 
         <section className="mx-auto w-full max-w-6xl px-4 sm:px-6 py-20 pb-32">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpItem}
-            className="overflow-hidden rounded-[2rem] border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#111] shadow-xl flex flex-col lg:flex-row"
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUpItem} className="overflow-hidden rounded-[2rem] border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#111] shadow-xl flex flex-col lg:flex-row">
             <div className="flex flex-col justify-center p-8 lg:p-14 lg:w-5/12 border-b lg:border-b-0 lg:border-r border-neutral-200 dark:border-neutral-800 text-center lg:text-left">
               <div className="mx-auto lg:mx-0 inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-[#00a65a]/10 mb-6 text-[#00a65a]">
                 <MapPin className="h-8 w-8" />

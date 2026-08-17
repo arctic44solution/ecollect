@@ -44,7 +44,7 @@ export function CoverflowCarousel({
   cardWidth = "clamp(240px, 40vw, 360px)", // Made cards slightly larger for readability
   gap = 0.05,
   loop = true,
-  showCaption = false,
+  
   showPagination = false,
   showNavigation = false,
   label = "Feature carousel",
@@ -212,8 +212,6 @@ export function CoverflowCarousel({
     [],
   );
 
-  const active = slides[selected];
-
   return (
     <div
       className={cn("w-full", className)}
@@ -274,7 +272,7 @@ export function CoverflowCarousel({
                   draggable={false}
                   className="h-full w-full select-none object-cover brightness-75 hover:brightness-100 transition-all duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute bottom-6 left-6 right-6">
                    <h3 className="text-white font-bold text-xl sm:text-2xl mb-1">{slide.title}</h3>
                    <p className="text-white/80 text-xs sm:text-sm font-medium line-clamp-2">{slide.subtitle}</p>
@@ -290,7 +288,7 @@ export function CoverflowCarousel({
               type="button"
               aria-label="Previous slide"
               onClick={() => nudge(-1)}
-              className="absolute left-4 top-1/2 z-[200] -translate-y-1/2 rounded-full bg-white/90 dark:bg-black/90 p-3 text-emerald-600 dark:text-emerald-500 backdrop-blur transition hover:scale-110 shadow-lg border border-neutral-200 dark:border-neutral-800"
+              className="absolute left-4 top-1/2 z-200 -translate-y-1/2 rounded-full bg-white/90 dark:bg-black/90 p-3 text-emerald-600 dark:text-emerald-500 backdrop-blur transition hover:scale-110 shadow-lg border border-neutral-200 dark:border-neutral-800"
             >
               <ChevronLeft className="size-6" />
             </button>
@@ -298,7 +296,7 @@ export function CoverflowCarousel({
               type="button"
               aria-label="Next slide"
               onClick={() => nudge(1)}
-              className="absolute right-4 top-1/2 z-[200] -translate-y-1/2 rounded-full bg-white/90 dark:bg-black/90 p-3 text-emerald-600 dark:text-emerald-500 backdrop-blur transition hover:scale-110 shadow-lg border border-neutral-200 dark:border-neutral-800"
+              className="absolute right-4 top-1/2 z-200 -translate-y-1/2 rounded-full bg-white/90 dark:bg-black/90 p-3 text-emerald-600 dark:text-emerald-500 backdrop-blur transition hover:scale-110 shadow-lg border border-neutral-200 dark:border-neutral-800"
             >
               <ChevronRight className="size-6" />
             </button>

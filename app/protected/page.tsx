@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/lib/supabase/server";
 import { InfoIcon } from "lucide-react";
-import { FetchDataSteps } from "@/components/tutorial/fetch-data-steps";
 import { Suspense } from "react";
 
 async function UserDetails() {
@@ -14,6 +13,16 @@ async function UserDetails() {
   }
 
   return JSON.stringify(data.claims, null, 2);
+}
+
+function FetchDataSteps() {
+  return (
+    <ol className="flex flex-col gap-3 list-decimal pl-5 text-sm text-foreground/80">
+      <li>Build a query to fetch data from the Supabase database.</li>
+      <li>Pass the result to your page component and render the data.</li>
+      <li>Use server-side rendering or client-side fetching as needed.</li>
+    </ol>
+  );
 }
 
 export default function ProtectedPage() {

@@ -100,7 +100,7 @@ export function LocationMap({
           transition={{ type: "spring", stiffness: 400, damping: 35 }}
         >
           {/* Abstract Map Background for the card */}
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-teal-500/10 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-br from-emerald-500/10 via-transparent to-teal-500/10 pointer-events-none" />
           <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
             <svg width="100%" height="100%" className="absolute inset-0">
               <defs>
@@ -137,7 +137,7 @@ export function LocationMap({
                 {coordinates}
               </p>
               <motion.div
-                className="h-1 rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-transparent mt-2"
+                className="h-1 rounded-full bg-linear-to-r from-emerald-500 via-teal-400 to-transparent mt-2"
                 animate={{ scaleX: isHovered ? 1 : 0.3, originX: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               />
@@ -158,7 +158,7 @@ export function LocationMap({
       <AnimatePresence>
         {isExpanded && (
           <motion.div
-            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-12"
+            className="fixed inset-0 z-9999 flex items-center justify-center p-4 sm:p-6 md:p-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -186,21 +186,21 @@ export function LocationMap({
               
               {/* Massive Close Button */}
               <button
-                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[200] flex items-center justify-center h-12 w-12 rounded-full bg-white/90 dark:bg-black/90 border border-neutral-200 dark:border-neutral-800 shadow-xl text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-all hover:scale-105 active:scale-95"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 z-200 flex items-center justify-center h-12 w-12 rounded-full bg-white/90 dark:bg-black/90 border border-neutral-200 dark:border-neutral-800 shadow-xl text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-all hover:scale-105 active:scale-95"
                 onClick={() => setIsExpanded(false)}
               >
                 <X className="h-6 w-6" />
               </button>
 
               {/* Text Hint Badge (Top Left) */}
-              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-[100] bg-white/95 dark:bg-black/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 pointer-events-none">
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-100 bg-white/95 dark:bg-black/90 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 pointer-events-none">
                  <p className="text-xs sm:text-sm font-bold text-neutral-800 dark:text-neutral-200">
                      Drag to move
                  </p>
               </div>
 
               {/* NEW: Manual Zoom Controller (+ / -) Bottom Right */}
-              <div className="absolute bottom-6 right-4 sm:bottom-8 sm:right-8 z-[200] flex flex-col gap-1 bg-white/95 dark:bg-black/90 backdrop-blur-md p-1.5 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800">
+              <div className="absolute bottom-6 right-4 sm:bottom-8 sm:right-8 z-200 flex flex-col gap-1 bg-white/95 dark:bg-black/90 backdrop-blur-md p-1.5 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800">
                 <button
                   onClick={() => triggerZoom("in")}
                   className="flex items-center justify-center h-12 w-12 rounded-xl bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-emerald-600 transition-colors active:scale-95"

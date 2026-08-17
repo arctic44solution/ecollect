@@ -5,7 +5,6 @@ import {
   Map,
   MapMarker,
   MarkerContent,
-  MarkerPopup,
   MarkerTooltip,
   MapGeoJSON,
 } from "@/components/ui/map";
@@ -268,7 +267,7 @@ export function CoverageMap() {
              <MarkerContent>
                <div className="relative flex h-6 w-6 items-center justify-center -mt-3 -ml-3">
                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-80"></span>
-                 <div className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-600 border-[2px] border-white shadow-lg">
+                 <div className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-600 border-2px border-white shadow-lg">
                    <div className="h-1.5 w-1.5 bg-white rounded-full" />
                  </div>
                </div>

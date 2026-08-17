@@ -4,6 +4,9 @@ import { ThemeProvider } from "next-themes";
 import Navbar from "@/components/navbar";
 import "./globals.css";
 
+// FIX 1: Use Capital 'L' for LanguageProvider
+import { LanguageProvider } from "@/lib/language-context";
+
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -39,9 +42,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* Your custom navbar renders globally */}
-          <Navbar />
-          <main className="flex-1 w-full flex flex-col">{children}</main>
+          {/* FIX 2: Wrap both the Navbar AND the main children inside the Provider! */}
+          <LanguageProvider>
+            
+            {/* Your custom navbar renders globally */}
+            <Navbar />
+            
+            {/* Main content renders exactly once */}
+            <main className="flex-1 w-full flex flex-col">
+              {children}
+            </main>
+            
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
